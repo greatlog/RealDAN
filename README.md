@@ -13,7 +13,7 @@ If this repo works for you, please cite our paper
 This repo is buid on the basis of [BasicSR](https://github.com/XPixelGroup/BasicSR)
 
 ## Model Weights
-Download the checkpoints of DAN_Plus from [BaiduYun](https://pan.baidu.com/s/1tNT6G-6vh6fCnZrvXLvBBw?pwd=ig96)(password: ig96).
+Download the checkpoints of RealDAN from [BaiduYun](https://pan.baidu.com/s/1tNT6G-6vh6fCnZrvXLvBBw?pwd=ig96)(password: ig96).
 
 Put the downloaded checkpoints into [checkpoints](./checkpoints)
 
