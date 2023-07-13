@@ -5,7 +5,6 @@ result/
 result
 log/
 log
-checkpoints/*
 !checkpoints/
 
 data_samples/
