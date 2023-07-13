@@ -1,0 +1,40 @@
+#### general settings
+name: dan_edsr
+scale: 4
+save: true
+gpu_ids: [7]
+
+model:
+  type: DegSRModel
+
+evaluation:
+  metrics: [psnr, ssim, lpips]
+  lpips_type: alex
+  max_value: 255
+  crop_border: 4
+  cuda: true
+  y_channel: true
+
+datasets:
+  test0:
+    name: DIV2K_Real
+    mode: PairedDataset
+    data_type: lmdb
+    dataroot_tgt: /home/lzx/SRDatasets/DIV2K_valid/HR/x4.lmdb
+    dataroot_src: /home/lzx/SRDatasets/DIV2K_valid/deg/DIV2K_Real.lmdb
+ 
+#### network structures
+networks:
+  netSR:
+    which_network: DAN
+    setting:
+      block: edsr
+      nc: 3
+      nf: 64
+      nb: 16
+      deg_dim: 42
+      scale: 4
+      loop: 3
+    pretrain: 
+      path: ../../../checkpoints/RealDAN_GAN.pth
+      strict_load: true

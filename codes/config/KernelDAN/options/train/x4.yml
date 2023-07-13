@@ -1,0 +1,120 @@
+#### general settings
+name: dan_kernelgan_x4_k31
+scale: 4
+save: true
+gpu_ids: [0, 1, 4, 5]
+
+model:
+  type: DegSRModel
+
+evaluation:
+  metrics: [psnr, ssim]
+  lpips_type: alex
+  max_value: 255
+  crop_border: ~
+  cuda: true
+
+#### datasets
+datasets:
+  train:
+    name: DIV2K
+    mode: SingleImageDataset
+    data_type: lmdb
+    color: RGB
+    ratio: 256
+
+    dataroot: /home/lzx/SRDatasets/DF2K/HR/x4.lmdb
+
+    use_shuffle: true
+    workers_per_gpu: 4  # per GPU
+    imgs_per_gpu: 16
+    img_size: 192
+    use_flip: true
+    use_rot: true
+
+  val:
+    name: DIV2KRK
+    mode: PairedDataset
+    data_type: lmdb
+    color: RGB
+
+    dataroot_src: /home/lzx/SRDatasets/DIV2KRK/x4_mini.lmdb
+    dataroot_tgt: /home/lzx/SRDatasets/DIV2KRK/gt_mini.lmdb
+
+#### network structures
+networks:
+  netDeg:
+    which_network: Degrader
+    setting:
+      deg_scale: 4
+      crop_size: ~
+      return_ratio: true
+      resize_back: true
+      blur_opt: 
+        ksize: 31
+        range_radius: [15, 15]
+        range_x: [0.6, 5]
+        range_y: [0.6, 5]
+        range_t: [0, 0.5]
+        range_betag: [0.5, 4]
+        range_betap: [1, 2]
+        iso_prob: 0.0
+        generalized_prob: 0.0
+        gaussian_prob: 1.0
+        sinc_prob: 0.0
+        random_disturb: 0.25
+  
+  netSR:
+    which_network: DAN
+    setting:
+      block: edsr
+      nc: 3
+      nf: 64
+      nb: 16
+      deg_dim: 8
+      scale: 4
+      loop: 3
+    pretrain: 
+      path: ~ 
+      strict_load: true
+  
+#### training settings: learning rate scheme, loss
+train:
+  resume_state: ~
+  manual_seed: ~
+  queue_size: 256
+  ema_decay: 0.999
+
+  niter: 600000
+  warmup_iter: -1  # no warm up
+
+  losses:
+    sr_pix:
+      type: L1Loss
+      weight: 1.0
+    
+    deg_reg:
+      type: MSELoss
+      weight: 1.0
+    
+  optimizers:
+    netSR:
+      type: Adam
+      lr: !!float 2e-4
+  
+  schedulers:
+    default:
+      type: MultiStepRestartLR
+      milestones: [300000, 500000]
+      gamma: 0.5
+
+validation:
+  val_freq: !!float 5e3
+  save: true
+
+#### logger
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5e3
+  use_tb_logger: false
+

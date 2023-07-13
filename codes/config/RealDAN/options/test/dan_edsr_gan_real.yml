@@ -1,0 +1,45 @@
+#### general settings
+name: dan_edsr_gan
+scale: 4
+save: true
+gpu_ids: [6]
+
+model:
+  type: DegSRModel
+
+evaluation:
+  metrics: [niqe, nrqm, pi]
+  lpips_type: alex
+  max_value: 255
+  crop_border: 4
+  cuda: false
+  y_channel: false
+
+datasets:
+  test4:
+    name: 2020Track2
+    mode: SingleImageDataset
+    data_type: lmdb
+    dataroot: /home/lzx/SRDatasets/NTIRE2020/track2/test.lmdb
+
+  test5:
+    name: BSRGANTestSet
+    mode: SingleImageDataset
+    data_type: lmdb
+    dataroot: /home/lzx/SRDatasets/BSRGANTest/real.lmdb
+ 
+#### network structures
+networks:
+  netSR:
+    which_network: DAN
+    setting:
+      block: edsr
+      nc: 3
+      nf: 64
+      nb: 16
+      deg_dim: 42
+      scale: 4
+      loop: 3
+    pretrain: 
+      path: ../../../checkpoints/RealDAN_GAN.pth
+      strict_load: true

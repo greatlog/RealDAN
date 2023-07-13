@@ -1,0 +1,38 @@
+#### general settings
+name: dan_kernelgan_x4_k31
+scale: 4
+save: true
+gpu_ids: [7]
+
+model:
+  type: DegSRModel
+
+evaluation:
+  metrics: [psnr, ssim]
+  lpips_type: alex
+  max_value: 255
+  crop_border: 4
+  cuda: true
+  y_channel: true
+
+datasets:
+  test0:
+    name: DIV2KRK
+    mode: PairedDataset
+    data_type: lmdb
+    dataroot_tgt: /home/lzx/SRDatasets/DIV2KRK/gt.lmdb
+    dataroot_src: /home/lzx/SRDatasets/DIV2KRK/x4.lmdb
+
+networks:
+  netSR:
+    which_network: DAN
+    setting:
+      nc: 3
+      nf: 64
+      nb: 16
+      deg_dim: 8
+      scale: 4
+      loop: 3
+    pretrain: 
+      path: ../../../checkpoints/KernelDANx4.pth
+      strict_load: true
