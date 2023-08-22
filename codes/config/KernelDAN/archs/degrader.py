@@ -1,3 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding:utf-8 -*-
+###
+# File: degrader.py
+# Created Date: Thursday August 17th 2022
+# Author: Zhengxiong Luo
+# Contact: <zhengxiong.luo@cripac.ia.ac.cn>
+# 
+# Last Modified: Tuesday August 22nd 2023 10:54:49 am
+# 
+# Copyright (c) 2023 Center of Research on Intelligent Perception and Computing (CRIPAC)
+# All rights reserved.
+# -----
+# HISTORY:
+# Date      	 By	Comments
+# ----------	---	----------------------------------------------------------
+###
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
