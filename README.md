@@ -53,7 +53,7 @@ python3 test.py \
 and
 
 ```bash
-cd codes/RealDAN
+cd codes/config/RealDAN
 python3 test.py \
 --opt options/test/dan_edsr_syn.yml
 ```
@@ -62,7 +62,7 @@ python3 test.py \
 For evaluation on DIV2KRK, please download the [dataset](http://www.wisdom.weizmann.ac.il/~vision/kernelgan/DIV2KRK_public.zip) to your own path, and run
 
 ```bash
-cd codes/KernelDAN
+cd codes/config/KernelDAN
 python3 test.py \
 --opt options/test/x2.yml 
 ```
@@ -70,7 +70,7 @@ python3 test.py \
 and
 
 ```bash
-cd codes/KernelDAN
+cd codes/config/KernelDAN
 python3 test.py \
 --opt options/test/x4.yml 
 ```
