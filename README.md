@@ -23,7 +23,7 @@ Put the downloaded checkpoints into [checkpoints](./checkpoints)
 For inference on Real-World images
 
 ```bash
-cd codes/RealDAN
+cd codes/config/RealDAN
 python3 inference.py \
 --opt options/test/dan_edsr_gan_real.yml \
 --input_dir=/dir/of/input/images \
@@ -33,7 +33,7 @@ python3 inference.py \
 For inference on blurry images
 
 ```bash
-cd codes/KernelDAN
+cd codes/config/KernelDAN
 python3 inference.py \
 --opt options/test/x4.yml \
 --input_dir=/dir/of/input/images \
@@ -45,7 +45,7 @@ python3 inference.py \
 For evaluation on DIV2K-Real, please download the [dataset](https://pan.baidu.com/s/1tNT6G-6vh6fCnZrvXLvBBw?pwd=ig96) to your own path, and run
 
 ```bash
-cd codes/RealDAN
+cd codes/config/RealDAN
 python3 test.py \
 --opt options/test/dan_edsr_gan_syn.yml
 ```
