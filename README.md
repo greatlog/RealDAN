@@ -17,7 +17,7 @@ Download the checkpoints of RealDAN from [BaiduYun](https://pan.baidu.com/s/1tNT
 
 Put the downloaded checkpoints into [checkpoints](./checkpoints)
 
-The model weights and datasets are also available at huggingface[https://huggingface.co/lzxlog/RealDAN] now.
+The model weights and datasets are also available at huggingface(https://huggingface.co/lzxlog/RealDAN) now.
 
 ## Inference
 
