@@ -241,7 +241,8 @@ def main_worker(gpu, ngpus_per_node, opt, args):
     avg_data_time = avg_iter_time = count = 0
     for epoch in range(start_epoch, total_epochs + 1):
         for _, train_data in enumerate(train_loader):
-
+            if hasattr(train_loader, "sampler") and hasattr(train_loader.sampler, "set_epoch"):
+                train_loader.sampler.set_epoch(epoch)
             current_step += 1
             count += 1
             if current_step > total_iters:
